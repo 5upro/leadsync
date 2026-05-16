@@ -10,3 +10,11 @@ export interface IUser extends Document {
 	passwordHash: string
 	role: Role
 }
+
+export const UserSafeSchema = z.object({
+    name: z.string(),
+    email: z.string(),
+    role: RoleEnum
+});
+
+export type UserSafe = z.infer<typeof UserSafeSchema>;

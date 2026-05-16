@@ -3,6 +3,7 @@ import validator from "@/middlewares/global.validator";
 import * as authController from "@/modules/auth/auth.controller";
 import { 
     RegisterPayloadSchema, 
+    LoginPayloadSchema,
 } from "@/types/auth";
 
 const router = Router();
@@ -49,6 +50,38 @@ const router = Router();
 router.post("/register", 
     validator(RegisterPayloadSchema),
     authController.register
+);
+
+/**
+ * @swagger
+ * /auth/login:
+ *   post:
+ *     tags: [Auth]
+ *     summary: Login with username or email
+ *     security: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required: true
+ *             properties:
+ *               email:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Login successful
+ *       401:
+ *         description: Invalid credentials 
+ *       500:
+ *         description: Internal server error 
+ */
+router.post("/login", 
+    validator(LoginPayloadSchema),
+	authController.login
 );
 
 export default router;
