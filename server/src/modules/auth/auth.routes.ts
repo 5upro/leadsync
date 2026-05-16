@@ -84,4 +84,31 @@ router.post("/login",
 	authController.login
 );
 
+/**
+ * @swagger
+ * /auth/refresh:
+ *   post:
+ *     tags: [Auth]
+ *     summary: Refresh access token
+ *     security: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required: [refreshToken]
+ *             properties:
+ *               refreshToken:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: New tokens issued
+ *       401:
+ *         description: Invalid or expired refresh token
+ */
+router.post("/refresh", 
+	authController.refreshToken
+);
+
 export default router;
