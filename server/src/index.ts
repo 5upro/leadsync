@@ -1,10 +1,15 @@
 import express from "express";
 import "dotenv/config";
 
+import swaggerUi from "swagger-ui-express";
+import { swaggerSpec } from "@/config/swagger";
+
 const PORT = process.env.PORT;
 if(!PORT) throw new Error("PORT is not defined");
 
 const app = express();
+
+app.use("/api/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.listen(PORT, () => {
     console.log("Server is running on http://localhost:" + PORT);
