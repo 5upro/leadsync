@@ -2,10 +2,7 @@ import type {
 	AccessTokenPayload, 
 	RefreshTokenPayload 
 } from "@/types/token";
-import jwt, {
-	JsonWebTokenError, 
-	TokenExpiredError, 
-} from "jsonwebtoken";
+import jwt from "jsonwebtoken";
 import { createHash } from "crypto";
 import { AppError } from "@/utils/error";
 
@@ -41,13 +38,15 @@ const verifyToken = <T>(token: string, secret: string) => {
 		return jwt.verify(token, secret, {
 			algorithms: ["HS256"]
 		}) as T;
-	} catch (error) {
-		if(error instanceof TokenExpiredError){
-            throw new AppError("Token expired", 401);
+	} catch(error) {
+		if(error instanceof Error) {
+			if(error.name === "TokenExpiredError") {
+				throw new AppError("Token expired", 401)
+			}
+			if(error.name === "JsonWebTokenError") {
+				throw new AppError(error.message, 400)
+			}
 		}
-		if(error instanceof JsonWebTokenError){
-            throw new AppError(error.message, 400);
-        }
 		throw new AppError("Internal server error", 500);
 	}
 }
