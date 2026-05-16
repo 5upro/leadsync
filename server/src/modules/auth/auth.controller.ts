@@ -6,7 +6,7 @@ import type {
 import * as authService from "@/modules/auth/auth.service";
 
 /* ROUTE: POST /auth/register
-* BODY: 
+* RESPONSE: 
 * {
 *     message: string, 
 *     statusCode: number, 
@@ -29,7 +29,7 @@ export const register = async (req: Request, res: Response, next: NextFunction) 
 }
 
 /* ROUTE: POST /auth/login
-* BODY: 
+* RESPONSE: 
 * {
 *     message: string, 
 *     statusCode: number, 
@@ -52,7 +52,7 @@ export const login = async (req: Request, res: Response, next: NextFunction) => 
 }
 
 /* ROUTE: POST /auth/refresh
-* BODY: 
+* RESPONSE: 
 * {
 *     message: string, 
 *     statusCode: number, 
@@ -73,4 +73,24 @@ export const refreshToken = async (req: Request, res: Response, next: NextFuncti
 	} catch (err) {
 		next(err);
 	}
+}
+
+/* ROUTE: POST /auth/logout
+ * RESPONSE:
+ * {
+ *		message: string,
+ *		statusCode: number
+ * }
+ */
+export const logout = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const { token } = req.body
+    await authService.logout(token)
+    res.status(200).json({
+      message: "Logged out successfully!",
+      statusCode: 200
+    })
+  } catch (err) {
+    next(err)
+  }
 }

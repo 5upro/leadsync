@@ -5,6 +5,7 @@ import {
     RegisterPayloadSchema, 
     LoginPayloadSchema,
 } from "@/types/auth";
+import { RefreshTokenSchema } from "@/types/token";
 
 const router = Router();
 
@@ -108,7 +109,33 @@ router.post("/login",
  *         description: Invalid or expired refresh token
  */
 router.post("/refresh", 
+    validator(RefreshTokenSchema),
 	authController.refreshToken
 );
 
+/**
+ * @swagger
+ * /auth/logout:
+ *   post:
+ *     summary: Logout user
+ *     tags: [Auth]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               refreshToken:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Logged out successfully
+ *       401:
+ *         description: Invalid refresh token
+ */
+router.post("/logout", 
+    validator(RefreshTokenSchema),
+	authController.logout
+);
 export default router;

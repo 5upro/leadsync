@@ -147,3 +147,13 @@ export const refreshToken = async (token: string) => {
 		}
 	};
 }
+
+export const logout = async (refreshToken: string) => {
+	const hashed = hashToken(refreshToken)
+
+	const tokenDoc = await RefreshToken.findOne({ token: hashed })
+	if (!tokenDoc) throw new AppError("Invalid refresh token", 401)
+
+	tokenDoc.isRevoked = true
+	await tokenDoc.save()
+}

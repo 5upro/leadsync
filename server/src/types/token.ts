@@ -8,14 +8,18 @@ export interface IRefreshToken extends Document {
 	isRevoked: boolean
 }
 
-export const accessTokenPayloadSchema = z.object({
+export const AccessTokenPayloadSchema = z.object({
 	userId: z.string(),
 	role: RoleEnum
-})
+});
 
-export const refreshTokenPayloadSchema = z.object({
+export const RefreshTokenPayloadSchema = z.object({
 	userId: z.string()
-})
+});
 
-export type AccessTokenPayload	= z.infer<typeof accessTokenPayloadSchema>;
-export type RefreshTokenPayload = z.infer<typeof refreshTokenPayloadSchema>;
+export const RefreshTokenSchema = z.object({
+    token: z.string(),
+});
+
+export type AccessTokenPayload	= z.infer<typeof AccessTokenPayloadSchema>;
+export type RefreshTokenPayload = z.infer<typeof RefreshTokenPayloadSchema>;
