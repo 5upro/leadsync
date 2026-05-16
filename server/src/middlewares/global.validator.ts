@@ -11,6 +11,7 @@ const validator = <T>(schema: ZodType<T>) =>
 
 		if (!parsed.success) {
 			return res.status(400).json({
+				statusCode: 400,
 				error: parsed.error.issues.map((err) => ({
 					path: err.path.join("."),
 					message: err.message,
