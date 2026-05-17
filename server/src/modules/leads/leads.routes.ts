@@ -119,4 +119,35 @@ router.get("/",
 	leadsController.getLeads
 );
 
+/**
+ * @swagger
+ * /leads/{id}:
+ *   get:
+ *     tags: [Leads]
+ *     summary: Get a lead by ID
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: Lead ID
+ *     responses:
+ *       200:
+ *         description: Lead fetched successfully
+ *       400:
+ *         description: Invalid lead ID
+ *       401:
+ *         description: Unauthorized
+ *       404:
+ *         description: Lead not found
+ *       500:
+ *         description: Internal server error
+ */
+router.get("/:id",
+	leadsController.getLeadById
+);
+
 export default router;

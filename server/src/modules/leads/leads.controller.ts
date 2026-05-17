@@ -70,3 +70,28 @@ export const getLeads = async (req: Request, res: Response, next: NextFunction) 
         next(err)
     }
 }
+
+/* ROUTE: GET /leads/:id
+ * PARAMS:
+ * {
+ *		id: string
+ * }
+ * RESPONSE:
+ * {
+ *		message: string,
+ *		statusCode: number,
+ *		data: <LeadResponse> [REFERENCE: @/types/lead]
+ * }
+ */
+export const getLeadById = async (req: Request<{ id: string }>, res: Response, next: NextFunction) => {
+	try {
+		const lead = await leadsService.getLeadById(req.params.id);
+		res.status(200).json({
+			message: "Lead fetched successfully!",
+			statusCode: 200,
+			data: lead
+		})
+	} catch (err) {
+		next(err);
+	}
+}

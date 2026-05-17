@@ -6,6 +6,8 @@ import {
 	type CreateLeadPayload,
 	type LeadResponse,
 } from "@/types/lead";
+import { AppError } from "@/utils/error";
+import mongoose from "mongoose";
 
 export const createLeadService = async (
 	data: CreateLeadPayload,
@@ -52,4 +54,13 @@ export const getLeadsService = async (query: LeadsQueryPayload) => {
 			hasPrevPage: page > 1
 		}
 	}
+}
+
+export const getLeadById = async (id: string) => {
+	if (!mongoose.Types.ObjectId.isValid(id)) {
+		throw new AppError("Invalid lead ID", 400)
+	}
+	const lead = await Lead.findById(id)
+	if (!lead) throw new AppError("Lead not found", 404)
+	return lead
 }
