@@ -84,3 +84,17 @@ export const updateLead = async (
 
 	return await Lead.findByIdAndUpdate(id, { $set: payload }, { new: true })
 }
+
+export const deleteLead = async (id: string, role: string) => {
+	if (!mongoose.Types.ObjectId.isValid(id)) {
+		throw new AppError("Invalid lead ID", 400)
+	}
+	const lead = await Lead.findById(id)
+	if (!lead) throw new AppError("Lead not found", 404)
+
+	if (role !== "admin") {
+		throw new AppError("Only admins can delete leads", 403)
+	}
+
+	await Lead.findByIdAndDelete(id)
+}

@@ -205,4 +205,37 @@ router.patch("/:id",
 	leadsController.updateLead
 );
 
+/**
+ * @swagger
+ * /leads/{id}:
+ *   delete:
+ *     tags: [Leads]
+ *     summary: Delete a lead (admin only)
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: Lead ID
+ *     responses:
+ *       200:
+ *         description: Lead deleted successfully
+ *       400:
+ *         description: Invalid lead ID
+ *       401:
+ *         description: Unauthorized
+ *       403:
+ *         description: Forbidden - admin only
+ *       404:
+ *         description: Lead not found
+ *       500:
+ *         description: Internal server error
+ */
+router.delete("/:id",
+	leadsController.deleteLead
+);
+
 export default router;

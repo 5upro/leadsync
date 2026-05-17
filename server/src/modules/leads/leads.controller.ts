@@ -121,3 +121,26 @@ export const updateLead = async (req: Request<{ id: string }>, res: Response, ne
 		next(err);
 	}
 }
+
+/* ROUTE: DELETE /leads/:id
+ * PARAMS:
+ * {
+ *		id: string
+ * }
+ * RESPONSE:
+ * {
+ *		message: string,
+ *		statusCode: number,
+ * }
+ */
+export const deleteLead = async (req: Request<{ id: string }>, res: Response, next: NextFunction) => {
+	try {
+		await leadsService.deleteLead(req.params.id, req.user?.role!);
+		res.status(200).json({
+			message: "Lead deleted successfully!",
+			statusCode: 200
+		})
+	} catch (err) {
+		next(err);
+	}
+}
