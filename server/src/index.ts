@@ -6,6 +6,7 @@ import swaggerUi from "swagger-ui-express";
 import { swaggerSpec } from "@/config/swagger";
 
 import authRouter from "@/modules/auth/auth.routes";
+import leadsRouter from "@/modules/leads/leads.routes";
 import { errorHandler } from "@/middlewares/global.errorHandler";
 
 const PORT = process.env.PORT;
@@ -20,6 +21,7 @@ app.use(express.json());
 app.use("/api/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.use("/api/auth", authRouter);
+app.use("/api/leads", leadsRouter);
 
 app.use(errorHandler);
 
