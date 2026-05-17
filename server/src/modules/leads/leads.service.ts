@@ -5,6 +5,7 @@ import {
 	type LeadsQueryPayload,
 	type CreateLeadPayload,
 	type LeadResponse,
+    type UpdateLeadPayload,
 } from "@/types/lead";
 import { AppError } from "@/utils/error";
 import mongoose from "mongoose";
@@ -63,4 +64,23 @@ export const getLeadById = async (id: string) => {
 	const lead = await Lead.findById(id)
 	if (!lead) throw new AppError("Lead not found", 404)
 	return lead
+}
+
+export const updateLead = async (
+	id: string,
+	payload: UpdateLeadPayload,
+	userId: string,
+	role: string
+) => {
+	if (!mongoose.Types.ObjectId.isValid(id)) {
+		throw new AppError("Invalid lead ID", 400)
+	}
+	const lead = await Lead.findById(id)
+	if (!lead) throw new AppError("Lead not found", 404)
+
+	if (role !== "admin" && lead.createdBy.toString() !== userId) {
+		throw new AppError("Unauthorized", 403)
+	}
+
+	return await Lead.findByIdAndUpdate(id, { $set: payload }, { new: true })
 }

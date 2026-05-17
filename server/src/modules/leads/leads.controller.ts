@@ -95,3 +95,29 @@ export const getLeadById = async (req: Request<{ id: string }>, res: Response, n
 		next(err);
 	}
 }
+
+/* ROUTE: PATCH /leads/:id
+ * PARAMS:
+ * {
+ *		id: string
+ * }
+ * RESPONSE:
+ * {
+ *		message: string,
+ *		statusCode: number,
+ *		data: <LeadResponse> [REFERENCE: @/types/lead]
+ * }
+ */
+export const updateLead = async (req: Request<{ id: string }>, res: Response, next: NextFunction) => {
+	try {
+		const data = req.body;
+		const lead = await leadsService.updateLead(req.params.id, data, req.user?.userId!, req.user?.role!);
+		res.status(200).json({
+			message: "Lead updated successfully!",
+			statusCode: 200,
+			data: lead
+		})
+	} catch (err) {
+		next(err);
+	}
+}
