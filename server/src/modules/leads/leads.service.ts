@@ -57,6 +57,42 @@ export const getLeadsService = async (query: LeadsQueryPayload) => {
 	}
 }
 
+export const exportLeadsCSVService = async (query: Omit<LeadsQueryPayload, "page" | "limit">) => {
+    const { status, source, search, sort } = query;
+
+    const filter: LeadFilter = {};
+
+    if (status) filter.status = status
+    if (source) filter.source = source
+    if (search) {
+        filter.$or = [
+            { name: { $regex: search, $options: "i" } },
+            { email: { $regex: search, $options: "i" } }
+        ];
+    }
+
+    const sortOrder = sort === "oldest" ? 1 : -1;
+
+    const leads = await Lead.find(filter).sort({ createdAt: sortOrder });
+
+    const headers = ["ID", "Name", "Email", "Status", "Source", "Created At"];
+
+    const rows = leads.map(lead => [
+        lead._id.toString(),
+        lead.name,
+        lead.email,
+        lead.status,
+        lead.source,
+        lead.createdAt.toISOString()
+    ]);
+
+    const csv = [headers, ...rows]
+        .map(row => row.join(","))
+        .join("\n");
+
+    return csv;
+}
+
 export const getLeadById = async (id: string) => {
 	if (!mongoose.Types.ObjectId.isValid(id)) {
 		throw new AppError("Invalid lead ID", 400)

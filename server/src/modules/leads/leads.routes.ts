@@ -124,6 +124,55 @@ router.get("/",
 
 /**
  * @swagger
+ * /leads/export/csv:
+ *   get:
+ *     tags: [Leads]
+ *     summary: Export leads as CSV
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: query
+ *         name: status
+ *         schema:
+ *           type: string
+ *           enum: [new, contacted, qualified, lost]
+ *         description: Filter by status (optional)
+ *       - in: query
+ *         name: source
+ *         schema:
+ *           type: string
+ *           enum: [website, instagram, referral]
+ *         description: Filter by source (optional)
+ *       - in: query
+ *         name: search
+ *         schema:
+ *           type: string
+ *         description: Search by name or email (optional)
+ *       - in: query
+ *         name: sort
+ *         schema:
+ *           type: string
+ *           enum: [latest, oldest]
+ *           default: latest
+ *         description: Sort order (optional)
+ *     responses:
+ *       200:
+ *         description: CSV file download
+ *         content:
+ *           text/csv:
+ *             schema:
+ *               type: string
+ *       401:
+ *         description: Unauthorized
+ *       500:
+ *         description: Internal server error
+ */
+router.get("/export/csv", 
+	leadsController.exportLeadsCSV
+);
+
+/**
+ * @swagger
  * /leads/{id}:
  *   get:
  *     tags: [Leads]

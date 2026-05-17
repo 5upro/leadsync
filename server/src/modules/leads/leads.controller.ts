@@ -71,6 +71,31 @@ export const getLeads = async (req: Request, res: Response, next: NextFunction) 
     }
 }
 
+/* ROUTE: GET /leads/export/csv
+ * QUERY:
+ * {
+ *   status?: LeadStatus,
+ *   source?: LeadSource,
+ *   search?: string,
+ *   sort?: "latest" | "oldest"
+ * }
+ * RESPONSE: CSV file download
+ */
+export const exportLeadsCSV = async (req: Request, res: Response, next: NextFunction) => {
+	try {
+		const parsed = LeadsQuerySchema.omit({ page: true, limit: true }).safeParse(req.query);
+		if (!parsed.success) throw new AppError(parsed.error.issues[0].message, 400);
+
+		const csv = await leadsService.exportLeadsCSVService(parsed.data);
+
+		res.setHeader("Content-Type", "text/csv");
+		res.setHeader("Content-Disposition", "attachment; filename=leads.csv");
+		res.status(200).send(csv);
+	} catch (err) {
+		next(err);
+	}
+}
+
 /* ROUTE: GET /leads/:id
  * PARAMS:
  * {

@@ -13,6 +13,8 @@ export interface ILead extends Document {
 	status: LeadStatus
 	source: LeadSource
 	createdBy: Types.ObjectId
+    createdAt: Date
+    updatedAt: Date
 }
 
 export const LeadResponseSchema = z.object({
