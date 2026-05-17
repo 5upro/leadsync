@@ -60,4 +60,63 @@ router.post("/",
 	leadsController.createLead
 );
 
+/**
+ * @swagger
+ * /leads:
+ *   get:
+ *     tags: [Leads]
+ *     summary: Get all leads with filtering, search, sort and pagination
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: query
+ *         name: page
+ *         schema:
+ *           type: integer
+ *           default: 1
+ *         description: Page number (default 1)
+ *       - in: query
+ *         name: limit
+ *         schema:
+ *           type: integer
+ *           default: 10
+ *         description: Records per page (default 10)
+ *       - in: query
+ *         name: status
+ *         schema:
+ *           type: string
+ *           enum: [new, contacted, qualified, lost]
+ *         description: Filter by status (optional)
+ *       - in: query
+ *         name: source
+ *         schema:
+ *           type: string
+ *           enum: [website, instagram, referral]
+ *         description: Filter by source (optional)
+ *       - in: query
+ *         name: search
+ *         schema:
+ *           type: string
+ *         description: Search by name or email (optional)
+ *       - in: query
+ *         name: sort
+ *         schema:
+ *           type: string
+ *           enum: [latest, oldest]
+ *           default: latest
+ *         description: Sort order (default latest)
+ *     responses:
+ *       200:
+ *         description: Leads fetched successfully
+ *       400:
+ *         description: Validation error
+ *       401:
+ *         description: Unauthorized
+ *       500:
+ *         description: Internal server error
+ */
+router.get("/", 
+	leadsController.getLeads
+);
+
 export default router;
