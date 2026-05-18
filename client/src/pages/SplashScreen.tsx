@@ -1,11 +1,11 @@
 import type { FC } from "react";
-import Icon from "@/components/ui/Icon";
+import { BookUser } from "lucide-react";
 
 const SplashScreen: FC = () => (
 	<div className="fixed inset-0 z-50 bg-gray-950 flex flex-col items-center justify-center">
 		<div className="relative mb-8">
 			<div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-violet-500 to-indigo-600 flex items-center justify-center shadow-[0_0_60px_rgba(139,92,246,0.5)]">
-				<Icon name="leads" className="w-10 h-10 text-white" />
+				<BookUser className="w-10 h-10 text-white" />
 			</div>
 			<div className="absolute -inset-2 rounded-3xl border border-violet-500/30 animate-ping opacity-50" />
 		</div>

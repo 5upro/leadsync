@@ -1,6 +1,11 @@
 import type { FC } from "react";
 import type { NavbarProps } from "@/types/layout";
-import Icon from "@/components/ui/Icon";
+import { 
+	BookUser, 
+	LogOut, 
+	Moon, 
+	Sun 
+} from "lucide-react";
 
 const Navbar: FC<NavbarProps> = ({ user, dark, onToggleDark, onLogout }) => (
 	<nav className="bg-white dark:bg-gray-900 border-b border-gray-100 dark:border-gray-800 px-6 py-4 sticky top-0 z-30">
@@ -8,7 +13,7 @@ const Navbar: FC<NavbarProps> = ({ user, dark, onToggleDark, onLogout }) => (
 			{/* Brand */}
 			<div className="flex items-center gap-3">
 				<div className="w-8 h-8 rounded-xl bg-gradient-to-br from-violet-500 to-indigo-600 flex items-center justify-center shadow shadow-violet-500/30">
-					<Icon name="leads" className="w-4 h-4 text-white" />
+					<BookUser className="w-4 h-4 text-white" />
 				</div>
 				<span
 					className="font-bold text-gray-900 dark:text-white text-lg"
@@ -40,7 +45,7 @@ const Navbar: FC<NavbarProps> = ({ user, dark, onToggleDark, onLogout }) => (
 					className="p-2 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-500 dark:text-gray-400 transition"
 					aria-label="Toggle theme"
 				>
-					<Icon name={dark ? "sun" : "moon"} />
+					{dark ? (<Sun/>) : (<Moon/>) }
 				</button>
 
 				<button
@@ -48,7 +53,7 @@ const Navbar: FC<NavbarProps> = ({ user, dark, onToggleDark, onLogout }) => (
 					className="p-2 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-500 dark:text-gray-400 transition"
 					aria-label="Log out"
 				>
-					<Icon name="logout" />
+					<LogOut/>
 				</button>
 			</div>
 		</div>

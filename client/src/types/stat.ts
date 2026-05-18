@@ -1,4 +1,5 @@
 import type { LeadStatus } from "@/types/lead";
+import type { LucideIcon } from "lucide-react";
 
 export interface StatusBadgeProps {
 	status: LeadStatus;
@@ -7,6 +8,6 @@ export interface StatusBadgeProps {
 export interface StatCardProps {
 	label: string;
 	value: number;
-	icon: string;
-	gradient: string;
+	icon: LucideIcon;
+	className?: string;
 }

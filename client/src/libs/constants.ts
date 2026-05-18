@@ -2,10 +2,16 @@ import type {
 	LeadSource, 
 	LeadStatus 
 } from "@/types/lead";
+import { 
+	type LucideIcon, 
+	Globe, 
+	UsersRound, 
+	HeartHandshake, 
+} from "lucide-react";
 
 export const STATUSES: LeadStatus[] = ["new", "contacted", "qualified", "lost"];
 export const SOURCES: LeadSource[]  = ["website", "instagram", "referral"];
-export const PAGE_SIZE               = 10;
+export const PAGE_SIZE              = 10;
 
 export const STATUS_COLOR: Record<LeadStatus, string> = {
 	new:       "bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-300",
@@ -14,8 +20,8 @@ export const STATUS_COLOR: Record<LeadStatus, string> = {
 	lost:      "bg-red-100 text-red-700 dark:bg-red-900/40 dark:text-red-300",
 };
 
-export const SOURCE_ICON: Record<LeadSource, string> = {
-	website:   "🌐",
-	instagram: "📸",
-	referral:  "🤝",
+export const SOURCE_ICON: Record<LeadSource, LucideIcon> = {
+	website:   Globe,
+	instagram: UsersRound,
+	referral:  HeartHandshake,
 };

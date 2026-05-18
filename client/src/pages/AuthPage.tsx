@@ -17,8 +17,7 @@ import ModeToggle from "@/components/auth/ModeToggle";
 import AuthInput from "@/components/auth/AuthInput";
 import ConfirmPasswordInput from "@/components/auth/ConfirmPasswordInput";
 import Button from "@/components/ui/Button";
-import Icon from "@/components/ui/Icon";
-
+import { Moon, Sun } from "lucide-react";
 
 const AuthPage: FC = () => {
 	const navigate = useNavigate();
@@ -94,7 +93,7 @@ const AuthPage: FC = () => {
 				className="fixed top-5 right-5 p-2.5 rounded-xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-500 dark:text-gray-300 hover:scale-105 transition-all shadow-sm"
 				aria-label="Toggle theme"
 			>
-				<Icon name={dark ? "sun" : "moon"} />
+				{dark ? (<Sun/>) : (<Moon/>) }
 			</button>
 
 			<div className="w-full max-w-md">

@@ -3,7 +3,7 @@ import type { FilterBarProps } from "@/types/layout";
 import type { LeadSource, LeadStatus } from "@/types/lead";
 import type { SortOrder } from "@/types/api";
 import { STATUSES, SOURCES } from "@/libs/constants";
-import Icon from "@/components/ui/Icon";
+import { Search } from "lucide-react";
 
 const FilterBar: FC<FilterBarProps> = ({
 	search, status, source, sort,
@@ -15,7 +15,7 @@ const FilterBar: FC<FilterBarProps> = ({
 		<div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 p-4 mb-4 flex flex-wrap gap-3 items-center">
 			{/* Search */}
 			<div className="relative flex-1 min-w-[200px]">
-				<Icon name="search" className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+				<Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
 				<input
 					value={search}
 					onChange={(e) => onSearchChange(e.target.value)}
@@ -55,14 +55,20 @@ const FilterBar: FC<FilterBarProps> = ({
 			</select>
 
 			{/* Clear */}
-			{hasFilters && (
-				<button
-					onClick={onClear}
-					className="px-3 py-2.5 text-xs text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 border border-gray-200 dark:border-gray-700 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800 transition"
-				>
-					Clear filters
-				</button>
-			)}
+			<button
+				onClick={onClear}
+				disabled={!hasFilters}
+				className={`
+					px-3 py-2.5 text-xs border rounded-xl transition
+					${ hasFilters
+						? "text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800"
+						: "text-gray-300 dark:text-gray-600 border-gray-200 dark:border-gray-800 cursor-not-allowed opacity-60"
+					}
+				`}
+			>
+
+				Clear filters
+			</button>
 		</div>
 	);
 };
