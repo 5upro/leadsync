@@ -10,7 +10,7 @@ export async function login(creds: LoginCredentials): Promise<AuthPayload> {
 	return data;
 }
 
-export async function Register(creds: RegisterCredentials ): Promise<AuthPayload> {
+export async function register(creds: RegisterCredentials ): Promise<AuthPayload> {
 	const { data } = await api.post<AuthPayload>("/auth/register", creds);
 	return data;
 }
