@@ -62,6 +62,7 @@ LeadSync is a smart lead management application designed to streamline the proce
    ```bash
    cd server && pnpm run seed
    ```
+   > It will generate demo Leads and an Admin and Sales User
    
 5. Start the app by running:
    ```bash
