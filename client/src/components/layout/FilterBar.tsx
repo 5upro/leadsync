@@ -4,6 +4,7 @@ import type { LeadSource, LeadStatus } from "@/types/lead";
 import type { SortOrder } from "@/types/api";
 import { STATUSES, SOURCES } from "@/libs/constants";
 import { Search } from "lucide-react";
+import { capitalizeWords } from "@/libs/utils";
 
 const FilterBar: FC<FilterBarProps> = ({
 	search, status, source, sort,
@@ -31,7 +32,7 @@ const FilterBar: FC<FilterBarProps> = ({
 				className="px-3 py-2.5 text-sm bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-violet-500/50 transition"
 			>
 				<option value="">All Statuses</option>
-				{STATUSES.map((s) => <option key={s} value={s}>{s}</option>)}
+				{STATUSES.map((s) => <option key={s} value={s}>{capitalizeWords(s)}</option>)}
 			</select>
 
 			{/* Source */}
@@ -41,7 +42,7 @@ const FilterBar: FC<FilterBarProps> = ({
 				className="px-3 py-2.5 text-sm bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-violet-500/50 transition"
 			>
 				<option value="">All Sources</option>
-				{SOURCES.map((s) => <option key={s} value={s}>{s}</option>)}
+				{SOURCES.map((s) => <option key={s} value={s}>{capitalizeWords(s)}</option>)}
 			</select>
 
 			{/* Sort */}

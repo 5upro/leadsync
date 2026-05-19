@@ -34,8 +34,8 @@ const AuthPage: FC = () => {
 	const [mode, setMode] = useState<AuthMode>("login");
 
 	const [loginForm, setLoginForm] = useState<LoginForm>({
-		email: "admin@example.com",
-		password: "password123",
+		email: "",
+		password: "",
 	});
 
 	const [regForm, setRegForm] = useState<RegisterForm>({

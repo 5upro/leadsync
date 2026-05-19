@@ -18,9 +18,9 @@ const StatsBar: FC<StatsBarProps> = ({ leads }) => {
 
 	const cards = [
 		{ label: "Total Leads",		value: leads.length,		icon: UserRound,		className: "text-violet-500" },
-		{ label: "New Leads",		value: count("New"),		icon: Sparkles,			className: "text-blue-500" },
-		{ label: "Qualified Leads", value: count("Qualified"),	icon: UserRoundCheck,	className: "text-emerald-500" },
-		{ label: "Lost Leads",		value: count("Lost"),		icon: UserRoundX,		className: "text-red-500" },
+		{ label: "New Leads",		value: count("new"),		icon: Sparkles,			className: "text-blue-500" },
+		{ label: "Qualified Leads", value: count("qualified"),	icon: UserRoundCheck,	className: "text-emerald-500" },
+		{ label: "Lost Leads",		value: count("lost"),		icon: UserRoundX,		className: "text-red-500" },
 	];
 
 	return (

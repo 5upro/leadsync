@@ -9,6 +9,7 @@ import type { LeadStatus, LeadSource } from "@/types/lead";
 import { STATUSES, SOURCES } from "@/libs/constants";
 import Button from "@/components/ui/Button";
 import { X } from "lucide-react";
+import { capitalizeWords } from "@/libs/utils";
 
 type FormErrors = Partial<Record<keyof LeadFormData, string>>;
 
@@ -104,7 +105,9 @@ const LeadModal: FC<LeadModalProps> = ({ lead, onClose, onSave }) => {
 								onChange={(e: ChangeEvent<HTMLSelectElement>) => set("status", e.target.value as LeadStatus)}
 								className={inputCls("status")}
 							>
-								{STATUSES.map((s) => <option key={s}>{s}</option>)}
+								{STATUSES.map((s) => (
+									<option key={s} value={s}>{capitalizeWords(s)}</option>
+								))}
 							</select>
 						</div>
 						<div>
@@ -114,7 +117,9 @@ const LeadModal: FC<LeadModalProps> = ({ lead, onClose, onSave }) => {
 								onChange={(e: ChangeEvent<HTMLSelectElement>) => set("source", e.target.value as LeadSource)}
 								className={inputCls("source")}
 							>
-								{SOURCES.map((s) => <option key={s}>{s}</option>)}
+								{SOURCES.map((s) => (
+									<option key={s} value={s}>{capitalizeWords(s)}</option>
+								))}
 							</select>
 						</div>
 					</div>

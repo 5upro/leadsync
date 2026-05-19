@@ -1,7 +1,7 @@
 import type { FC } from "react";
 import type { LeadRowProps } from "@/types/leadComponents";
 import { SOURCE_ICON } from "@/libs/constants";
-import { fmtDate } from "@/libs/utils";
+import { capitalizeWords, fmtDate } from "@/libs/utils";
 import StatusBadge from "@/components/ui/StatusBadge";
 import { ContactRound, SquarePen, Trash2 } from "lucide-react";
 
@@ -11,7 +11,7 @@ const LeadRow: FC<LeadRowProps> = ({ lead, isAdmin, onView, onEdit, onDelete }) 
 		<td className="px-4 py-3.5">
 			<div className="flex items-center gap-3">
 				<div className="w-8 h-8 rounded-xl bg-gradient-to-br from-violet-400 to-indigo-500 flex items-center justify-center text-white text-xs font-bold flex-shrink-0">
-					{lead.name[0]}
+					{capitalizeWords(lead.name[0])}
 				</div>
 				<span className="text-sm font-medium text-gray-900 dark:text-white">{lead.name}</span>
 			</div>
@@ -22,7 +22,7 @@ const LeadRow: FC<LeadRowProps> = ({ lead, isAdmin, onView, onEdit, onDelete }) 
 
 		{/* Status */}
 		<td className="px-4 py-3.5">
-			<StatusBadge status={lead.status} />
+			<StatusBadge status={lead.status}/>
 		</td>
 
 		{/* Source */}
@@ -32,7 +32,7 @@ const LeadRow: FC<LeadRowProps> = ({ lead, isAdmin, onView, onEdit, onDelete }) 
 				return (
 					<>
 						<Icon className="inline mr-1 h-4 w-4" />
-						{lead.source}
+						{capitalizeWords(lead.source)}
 					</>
 				)
 			})()}
