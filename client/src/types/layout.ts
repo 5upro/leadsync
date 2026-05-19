@@ -1,20 +1,22 @@
 import type { User } from "@/types/auth";
+import type { LeadSource, LeadStatus } from "@/types/lead";
+import type { SortOrder } from "@/types/api";
 
 export interface NavbarProps {
-	user: User;
-	dark: boolean;
-	onToggleDark: () => void;
-	onLogout: () => void;
+    user: User;
+    dark: boolean;
+    onToggleDark: () => void;
+    onLogout: () => Promise<void>;
 }
 
 export interface FilterBarProps {
-	search: string;
-	status: string;
-	source: string;
-	sort: string;
-	onSearchChange: (v: string) => void;
-	onStatusChange: (v: string) => void;
-	onSourceChange: (v: string) => void;
-	onSortChange: (v: string) => void;
-	onClear: () => void;
+    search: string;
+    status: LeadStatus | "";
+    source: LeadSource | "";
+    sort: SortOrder;
+    onSearchChange: (v: string) => void;
+    onStatusChange: (v: LeadStatus | "") => void;
+    onSourceChange: (v: LeadSource | "") => void;
+    onSortChange: (v: SortOrder) => void;
+    onClear: () => void;
 }
