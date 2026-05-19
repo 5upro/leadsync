@@ -55,6 +55,12 @@ if(process.env.NODE_ENV === "production")
 	app.use("/api/auth", authLimiter, authRouter);
 else app.use("/api/auth", authRouter);
 app.use("/api/leads", leadsRouter);
+app.get("/api/health", 
+	(req, res) => res.status(200).json({
+		statusCode: 200,
+        message: "Server is healthy!"
+	})
+);
 
 app.use(errorHandler);
 
